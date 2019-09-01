@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5801232e-cea7-4a41-853a-77a14bb69496" name="Default Changelist" comment="Solved the problem number 00">
+    <list default="true" id="5801232e-cea7-4a41-853a-77a14bb69496" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_homeworks/lesson_002/04_my_family.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_homeworks/lesson_002/04_my_family.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_homeworks/lesson_002/06_songs_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_homeworks/lesson_002/06_songs_list.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,11 +13,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/python_homeworks/lesson_002/04_my_family.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/python_homeworks/lesson_002/05_zoo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="107" selection-start-line="24" selection-start-column="107" selection-end-line="24" selection-end-column="107" />
+            <state relative-caret-position="510">
+              <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/python_homeworks/lesson_002/06_songs_list.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="728">
+              <caret line="48" column="55" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -60,6 +69,8 @@
         <option value="$PROJECT_DIR$/python_homeworks/lesson_002/02_operations.py" />
         <option value="$PROJECT_DIR$/python_homeworks/lesson_002/03_favorite_movies.py" />
         <option value="$PROJECT_DIR$/python_homeworks/lesson_002/04_my_family.py" />
+        <option value="$PROJECT_DIR$/python_homeworks/lesson_002/05_zoo.py" />
+        <option value="$PROJECT_DIR$/python_homeworks/lesson_002/06_songs_list.py" />
       </list>
     </option>
   </component>
@@ -114,49 +125,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.04_my_family">
-    <configuration name="00_distance" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="python_homeworks_4PJDUod" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python_homeworks/lesson_002" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_homeworks/lesson_002/00_distance.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="01_circle" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="python_homeworks_4PJDUod" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python_homeworks/lesson_002" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_homeworks/lesson_002/01_circle.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.06_songs_list">
     <configuration name="02_operations" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="python_homeworks_4PJDUod" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -220,13 +189,55 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="05_zoo" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python_homeworks_4PJDUod" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python_homeworks/lesson_002" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_homeworks/lesson_002/05_zoo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="06_songs_list" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="python_homeworks_4PJDUod" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python_homeworks/lesson_002" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_homeworks/lesson_002/06_songs_list.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.06_songs_list" />
+        <item itemvalue="Python.05_zoo" />
         <item itemvalue="Python.04_my_family" />
         <item itemvalue="Python.03_favorite_movies" />
         <item itemvalue="Python.02_operations" />
-        <item itemvalue="Python.01_circle" />
-        <item itemvalue="Python.00_distance" />
       </list>
     </recent_temporary>
   </component>
@@ -332,7 +343,21 @@
       <option name="project" value="LOCAL" />
       <updated>1567360311902</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Solved 04_my_family">
+      <created>1567360700629</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1567360700629</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Solved 05_zoo">
+      <created>1567361170009</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1567361170009</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -419,7 +444,9 @@
     <MESSAGE value="Checked if the points are in radius" />
     <MESSAGE value="Solved 02_operations" />
     <MESSAGE value="Solved 03_favorite_movies" />
-    <option name="LAST_COMMIT_MESSAGE" value="Solved 03_favorite_movies" />
+    <MESSAGE value="Solved 04_my_family" />
+    <MESSAGE value="Solved 05_zoo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Solved 05_zoo" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/python_homeworks/lesson_008/01_family.py">
@@ -508,6 +535,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="107" selection-start-line="24" selection-start-column="107" selection-end-line="24" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python_homeworks/lesson_002/05_zoo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python_homeworks/lesson_002/06_songs_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="728">
+          <caret line="48" column="55" selection-start-line="48" selection-start-column="55" selection-end-line="48" selection-end-column="55" />
         </state>
       </provider>
     </entry>
