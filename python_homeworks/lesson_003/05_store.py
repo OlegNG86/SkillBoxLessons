@@ -54,10 +54,16 @@ store = {
 #         подсчет стоимости товара
 #     вывод на консоль количества и стоимости товара на складе
 
-# TODO здесь ваш код
+dict_sum = {}
+for name, code in goods.items():
+    dict_sum[name] = {'quantity': 0, 'cost': 0}
+    for i in store[code]:
+        quantity, cost = i['quantity'], i['price']
+        dict_sum[name]['quantity'] += quantity
+        dict_sum[name]['cost'] += quantity * cost
 
-
-
-
-
-
+for i in dict_sum.items():
+    name = i[0]
+    quantity = i[1]['quantity']
+    cost = i[1]['cost']
+    print('{} - {} шт, стоимость {} руб'.format(name, quantity, cost))
