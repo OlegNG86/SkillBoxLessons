@@ -10,5 +10,11 @@
 #   Студенту надо попросить ХХХ.ХХ рублей
 
 educational_grant, expenses = 10000, 12000
+Sum = expenses - educational_grant
+count = 9
 
-# TODO здесь ваш код
+while count > 0:
+    expenses += expenses * .03
+    Sum += expenses - educational_grant
+    count -= 1
+print('Студенту надо попросить {} рублей'.format(round(Sum, 2)))
