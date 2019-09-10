@@ -37,7 +37,7 @@ def draw_triangle(x=0, y=0, angle=0, length=200):
     v2 = sd.get_vector(start_point=v1.end_point, angle=v1.angle+120, length=v1.length)
     v2.draw()
 
-    v3 = sd.get_vector(start_point=v1.start_point, angle=v1.angle+60, length=v1.length)
+    v3 = sd.get_vector(start_point=v2.end_point, angle=v2.angle+120, length=v2.length)
     v3.draw()
 
 # draw_triangle(300, 200, 90, 300)
@@ -48,17 +48,17 @@ def draw_rectangle(x=0, y=0, angle=0, length=200):
     v1 = sd.get_vector(point, angle=angle, length=length)
     v1.draw()
 
-    v2 = sd.get_vector(start_point=v1.end_point, angle=v1.angle+90, length=v1.length)
+    v2 = sd.get_vector(start_point=v1.end_point, angle=v1.angle + 90, length=v1.length)
     v2.draw()
 
-    v3 = sd.get_vector(start_point=v1.start_point, angle=v1.angle+90, length=v1.length)
+    v3 = sd.get_vector(start_point=v2.end_point, angle=v2.angle + 90, length=v2.length)
     v3.draw()
 
-    v4 = sd.get_vector(start_point=v3.end_point, angle=v3.angle - 90, length=v3.length)
+    v4 = sd.get_vector(start_point=v3.end_point, angle=v3.angle + 90, length=v3.length)
     v4.draw()
 
 
-# draw_rectangle(150, 150, 35, 300)
+# draw_rectangle(250, 150, 35, 300)
 
 def draw_pentagon(x=0, y=0, angle=0, length=200):
     point = sd.get_point(x, y)
@@ -103,7 +103,49 @@ def draw_hexagon(x=0, y=0, angle=0, length=200):
     v6.draw()
 
 
-draw_hexagon(300, 200, 90, 100)
+def draw_multy(object=3, x=0, y=0, angle=0, length=200):
+    point = sd.get_point(x, y)
+
+    if object < 0:
+        print('Вы задали слишком мало точек.')
+
+    if object == 3:
+        anglePlus = 120
+    elif object == 4:
+        anglePlus = 90
+    elif object == 5:
+        anglePlus = 72
+    else:
+        anglePlus = 60
+
+
+    if object >= 3:
+
+        v1 = sd.get_vector(point, angle=angle, length=length)
+        v1.draw()
+
+        v2 = sd.get_vector(start_point=v1.end_point, angle=v1.angle + anglePlus, length=v1.length)
+        v2.draw()
+
+        v3 = sd.get_vector(start_point=v2.end_point, angle=v2.angle + anglePlus, length=v2.length)
+        v3.draw()
+
+        if object >=4:
+
+            v4 = sd.get_vector(start_point=v3.end_point, angle=v3.angle + anglePlus, length=v3.length)
+            v4.draw()
+
+            if object >=5:
+
+                v5 = sd.get_vector(start_point=v4.end_point, angle=v4.angle + anglePlus, length=v4.length)
+                v5.draw()
+
+                if object >=6:
+
+                    v6 = sd.get_vector(start_point=v5.end_point, angle=v5.angle + anglePlus, length=v5.length)
+                    v6.draw()
+
+draw_multy(6, 300, 150, angle=45, length=200)
 
 # Часть 1-бис.
 # Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
