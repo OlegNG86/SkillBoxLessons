@@ -8,7 +8,8 @@ import simple_draw as sd
 # - нарисовать падение этих N снежинок
 # - создать список рандомных длинн лучей снежинок (от 10 до 100) и пусть все снежинки будут разные
 
-N = 20
+N = 200
+
 
 # Пригодятся функции
 # sd.get_point()
@@ -17,11 +18,22 @@ N = 20
 # sd.random_number()
 # sd.user_want_exit()
 
-# TODO здесь ваш код
+
+# snowflake = sd.snowflake(point, length=length, color=sd.COLOR_WHITE, factor_a=0.6, factor_b=0.35, factor_c=60)
+x = 300
+y = 450
+
+
 while True:
     sd.clear_screen()
-    pass
-    pass
+    point = sd.get_point(x=sd.random_point().x, y=sd.random_point().y)
+    for _ in range(N):
+        length = sd.random_number(10, 100)
+        # sd.snowflake(point, length=length, color=sd.COLOR_WHITE, factor_a=0.6, factor_b=0.35, factor_c=60)
+        sd.snowflake(point, length=length, color=sd.COLOR_WHITE, factor_a=0.6, factor_b=0.35, factor_c=60)
+        y -= 10
+        x += 10
+
     pass
     sd.sleep(0.1)
     if sd.user_want_exit():
