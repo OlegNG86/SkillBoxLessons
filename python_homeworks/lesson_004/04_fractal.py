@@ -26,13 +26,27 @@ import simple_draw as sd
 
 # можно поиграть -шрифтами- цветами и углами отклонения
 
-def draw_branches(start_point_x, start_point_y, angle_draw, lenght_branches):
-    # Отклонение от угла рисования принять 30 град.
-    point = sd.get_point(start_point_x, start_point_y)
-    sd.get_vector(point, angle_draw + 30, length=lenght_branches).draw()
-    sd.get_vector(point, angle_draw - 30, length=lenght_branches).draw()
+def draw_branches(start_point, angle_draw, lenght_branches, count=10):
+    if count == 0:
+        return
 
-draw_branches(300, 300, 90, 200)
+    if lenght_branches < 1:
+        return
+    else:
+        v1 = sd.get_vector(start_point, angle_draw + 30, length=lenght_branches)
+        v1.draw()
+        v2 = sd.get_vector(start_point, angle_draw - 30, length=lenght_branches)
+        v2.draw()
+        count -= 1
+        next_length = v1.length * (.75 * (sd.random_number(80, 100)/100))
+        next_angle1 = v1.angle + 30 * sd.random_number(60, 100) / 100
+        next_angle2 = v2.angle - 30 * sd.random_number(60, 100) / 100
+        draw_branches(start_point=v1.end_point, angle_draw=next_angle1, lenght_branches=next_length, count=count)
+        draw_branches(start_point=v2.end_point, angle_draw=next_angle2, lenght_branches=next_length, count=count)
+
+
+root_point = sd.get_point(300, 30)
+draw_branches(start_point=root_point, angle_draw=90, lenght_branches=100)
 
 
 
