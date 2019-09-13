@@ -40,7 +40,8 @@ def draw_triangle(x=0, y=0, angle=0, length=200):
     v3 = sd.get_vector(start_point=v2.end_point, angle=v2.angle+120, length=v2.length)
     v3.draw()
 
-# draw_triangle(300, 200, 90, 300)
+
+draw_triangle(300, 200, 90, 300)
 
 def draw_rectangle(x=0, y=0, angle=0, length=200):
     point = sd.get_point(x, y)
@@ -82,6 +83,7 @@ def draw_pentagon(x=0, y=0, angle=0, length=200):
 # draw_pentagon(150, 150, 45, 100)
 
 def draw_hexagon(x=0, y=0, angle=0, length=200):
+    import simple_draw as sd
     point = sd.get_point(x, y)
 
     v1 = sd.get_vector(point, angle=angle, length=length)
@@ -102,6 +104,7 @@ def draw_hexagon(x=0, y=0, angle=0, length=200):
     v6 = sd.get_vector(start_point=v5.end_point, angle=v5.angle + 60, length=v5.length)
     v6.draw()
 
+    sd.pause()
 
 def draw_multy(object=3, x=0, y=0, angle=0, length=200):
     point = sd.get_point(x, y)
@@ -145,7 +148,7 @@ def draw_multy(object=3, x=0, y=0, angle=0, length=200):
                     v6 = sd.get_vector(start_point=v5.end_point, angle=v5.angle + anglePlus, length=v5.length)
                     v6.draw()
 
-draw_multy(6, 300, 150, angle=45, length=200)
+sd.pause()
 
 # Часть 1-бис.
 # Попробуйте прикинуть обьем работы, если нужно будет внести изменения в этот код.
