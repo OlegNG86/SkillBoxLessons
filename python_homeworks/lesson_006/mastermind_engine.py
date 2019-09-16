@@ -42,13 +42,36 @@
 # Движок игры реализует только саму функциональность игры.
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
+from random import randint
 
-from mastermind_engine import make_a_number, check_number
+_holder = []
 
-make_a_number()
-count = 0
-while True:
-    count += 1
-    if check_number() == True:
-        print('Количество Ваших попыток {}.'.format(count))
-        break
+def make_a_number():
+    global _holder
+    _holder.append(str(randint(1000, 9999)))
+
+def check_number():
+    number = str(input('Попробуйте отгадать число: '))
+    print('Вы ввели: ', number)
+
+    list_without_bull = []
+    number_without_bull = []
+
+    bull_cow = {'bulls': 0, 'cows': 0}
+
+    for i in range(len(_holder[0])):
+        if str(_holder[0][i]) == str(number[i]):
+            bull_cow['bulls'] += 1
+        else:
+            list_without_bull.append(_holder[0][i])
+            number_without_bull.append(number[i])
+
+    for i in list_without_bull:
+        if i in number_without_bull:
+            bull_cow['cows'] += 1
+            number_without_bull.remove(i)
+    if bull_cow['bulls'] == 4:
+        print(bull_cow)
+        return True
+    print(bull_cow)
+    return False
