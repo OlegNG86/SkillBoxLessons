@@ -62,7 +62,7 @@ class Man:
         self.house.money += 150
         self.fullness -= 10
 
-    def watch_MTV(self):
+    def watch_mtv(self):
         cprint('{} смотрел MTV целый день'.format(self.name), color='green')
         self.fullness -= 10
 
@@ -89,11 +89,19 @@ class Man:
             self.house.mud_from_cat -= 100
         else:
             cprint('{} уборка не требуется!'.format(self.name), color='red')
+            self.work()
 
     def go_to_the_house(self, house):
         self.house = house
         self.fullness -= 10
         cprint('{} Вьехал в дом'.format(self.name), color='cyan')
+
+    def pick_up_a_cat(self, house, Cat):
+        Cat.house = house
+        self.fullness -= 10
+        Cat.house.food_for_cat = 0
+        Cat.house.mud_from_cat = 0
+        cprint('{} подобрал кота'.format(self.name), color='cyan')
 
     def act(self):
         if self.fullness <= 0:
@@ -115,7 +123,7 @@ class Man:
         elif dice == 3:
             self.cleaning()
         else:
-            self.watch_MTV()
+            self.watch_mtv()
 
 
 class House:
@@ -160,16 +168,16 @@ class Cat:
         self.fullness -= 10
 
     def play(self):
-        cprint('{} играл(а) целый день'.format(self.name), color='green')
+        cprint('{} дерёт обои'.format(self.name), color='green')
         self.fullness -= 10
-        self.house.mud_from_cat += 10
+        self.house.mud_from_cat += 5
 
-    def go_to_the_house(self, house):
-        self.house = house
-        self.fullness -= 10
-        self.house.food_for_cat = 0
-        self.house.mud_from_cat = 0
-        cprint('{} Вьехал в дом'.format(self.name), color='cyan')
+    # def go_to_the_house(self, house):
+    #     self.house = house
+    #     self.fullness -= 10
+    #     self.house.food_for_cat = 0
+    #     self.house.mud_from_cat = 0
+    #     cprint('{} Вьехал в дом'.format(self.name), color='cyan')
 
     def act(self):
         if self.fullness <= 0:
@@ -198,7 +206,7 @@ my_sweet_home = House()
 for citisen in citizens:
     citisen.go_to_the_house(house=my_sweet_home)
 
-little_cat.go_to_the_house(my_sweet_home)
+Man('Бивис').pick_up_a_cat(my_sweet_home, little_cat)
 
 for day in range(1, 366):
     print('================ день {} =================='.format(day))
