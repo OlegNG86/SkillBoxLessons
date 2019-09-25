@@ -55,10 +55,11 @@ class Man:
             self.house.food -= 10
         else:
             cprint('{} нет еды'.format(self.name), color='red')
+            self.shopping()
 
     def work(self):
         cprint('{} сходил на работу'.format(self.name), color='blue')
-        self.house.money += 50
+        self.house.money += 150
         self.fullness -= 10
 
     def watch_MTV(self):
@@ -74,17 +75,17 @@ class Man:
             cprint('{} деньги кончились!'.format(self.name), color='red')
 
     def cat_shop(self):
-        if self.house.money >= 20:
+        if self.house.money >= 50:
             cprint('{} сходил в магазин за едой для кота'.format(self.name), color='magenta')
-            self.house.money -= 20
-            self.house.food_for_cat += 100
+            self.house.money -= 50
+            self.house.food_for_cat += 50
         else:
             cprint('{} деньги кончились!'.format(self.name), color='red')
 
     def cleaning(self):
         if self.house.mud_from_cat > 100:
             cprint('{} убрался дома'.format(self.name), color='magenta')
-            self.fullness -= 10
+            self.fullness -= 20
             self.house.mud_from_cat -= 100
         else:
             cprint('{} уборка не требуется!'.format(self.name), color='red')
@@ -99,13 +100,13 @@ class Man:
             cprint('{} умер...'.format(self.name), color='red')
             return
         dice = randint(1, 6)
-        if self.fullness < 20:
+        if self.fullness < 30:
             self.eat()
         elif self.house.food < 10:
             self.shopping()
         elif self.house.food_for_cat < 10:
             self.cat_shop()
-        elif self.house.money < 50:
+        elif self.house.money < 100:
             self.work()
         elif dice == 1:
             self.work()
@@ -182,7 +183,7 @@ class Cat:
         elif dice == 2:
             self.play()
         else:
-            self.sleep() or self.play()
+            self.sleep()
 
 
 little_cat = Cat('Анфиска')
