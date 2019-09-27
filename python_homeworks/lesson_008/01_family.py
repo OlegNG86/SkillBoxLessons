@@ -52,8 +52,10 @@ class House:
 
 class Husband:
 
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        self.name = name
+        self.fullness = 30
+        self.happiness = 100
 
     def __str__(self):
         return super().__str__()
