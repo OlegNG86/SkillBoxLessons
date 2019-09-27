@@ -56,6 +56,7 @@ class Husband:
         self.name = name
         self.fullness = 30
         self.happiness = 100
+        self.house = None
 
     def __str__(self):
         return super().__str__()
@@ -79,6 +80,7 @@ class Wife:
         self.name = name
         self.fullness = 30
         self.happiness = 100
+        self.house = None
 
     def __str__(self):
         return super().__str__()
