@@ -45,7 +45,9 @@ from random import randint
 class House:
 
     def __init__(self):
-        pass
+        self.money = 100
+        self.food = 50
+        self.mud = 0
 
 
 class Husband:
