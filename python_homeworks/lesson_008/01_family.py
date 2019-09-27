@@ -66,7 +66,8 @@ class Husband:
         return 'Я - {}, я сыт на {}, я счастлив на {}'.format(self.name, self.fullness, self.happiness)
 
     def act(self):
-        pass
+        if not self.eat():
+            self.fullness -= 10
 
     def eat(self):
         pass
@@ -90,7 +91,8 @@ class Wife:
         return 'Я - {}, я сыт на {}, я счастлив на {}'.format(self.name, self.fullness, self.happiness)
 
     def act(self):
-        pass
+        if not self.eat():
+            self.fullness -= 10
 
     def eat(self):
         pass
