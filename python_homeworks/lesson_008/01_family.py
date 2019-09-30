@@ -49,62 +49,110 @@ class House:
         self.money = 100
         self.food = 50
         self.mud = 0
+        self.coat = 0
 
     def __str__(self):
-        return 'В доме дефнег {}, еды {}, грязи {}'.format(self.money, self.food, self.mud)
+        return 'В доме денег {}, еды {}, грязи {}, шуб {}'.format(self.money, self.food, self.mud, self.coat)
 
 
-class Husband:
+class Citizen:
 
     def __init__(self, name):
         self.name = name
         self.fullness = 30
         self.happiness = 100
-        self.house = None
+        self.house = home
 
     def __str__(self):
-        return 'Я - {}, я сыт на {}, я счастлив на {}'.format(self.name, self.fullness, self.happiness)
+        if self.fullness <= 0:
+            return '{} умер от голода...'.format(self.name)
+        if self.happiness < 10:
+            return '{} умер от дипрессии...'.format(self.name)
 
-    def act(self):
-        if not self.eat():
-            self.fullness -= 10
+        else:
+            return 'Я - {}, я сыт на {}, я счастлив на {}'.format(self.name, self.fullness, self.happiness)
 
     def eat(self):
-        pass
+        if self.house.food >= 30:
+            cprint('{} поел!'.format(self.name), color='green')
+            self.house.food -= 30
+            self.fullness += 30
+
+    def act(self):
+        home.mud += 5
+        if home.mud > 90:
+            self.happiness -= 10
+        elif self.fullness <= 20:
+            self.eat()
+
+
+class Husband(Citizen):
+
+    def __init__(self, name):
+        super().__init__(name)
+
+    def act(self):
+        super().act()
+        dice = randint(1, 6)
+        if self.happiness <= 20:
+            self.gaming()
+        elif dice == 1:
+            self.work()
+        elif dice == 2:
+            self.gaming()
+
+    def eat(self):
+        super().eat()
 
     def work(self):
-        pass
+        cprint('{} сходил на работу!'.format(self.name), color='green')
+        home.money += 150
+        self.fullness -= 10
 
     def gaming(self):
-        pass
+        cprint('{} поиграл в WoT!'.format(self.name), color='green')
+        self.fullness -= 10
+        self.happiness += 20
 
 
-class Wife:
+class Wife(Citizen):
 
     def __init__(self, name):
-        self.name = name
-        self.fullness = 30
-        self.happiness = 100
-        self.house = None
-
-    def __str__(self):
-        return 'Я - {}, я сыт на {}, я счастлив на {}'.format(self.name, self.fullness, self.happiness)
+        super().__init__(name)
 
     def act(self):
-        if not self.eat():
-            self.fullness -= 10
+        super().act()
+        dice = randint(1, 6)
+        if self.house.food <= 30:
+            self.shopping()
+        if self.happiness <= 20:
+            self.buy_fur_coat()
+        elif self.house.mud >= 90:
+            self.clean_house()
+        elif dice == 1:
+            self.shopping()
+        elif dice == 2:
+            self.buy_fur_coat()
 
     def eat(self):
-        pass
+        super().eat()
 
     def shopping(self):
-        pass
+        if self.house.money >= 10:
+            cprint('{} сходила в магазин!'.format(self.name), color='green')
+            self.house.money -= 10
+            self.house.food += 10
 
     def buy_fur_coat(self):
-        pass
+        if self.house.money >= 350:
+            self.house.money -= 350
+            self.house.coat += 1
+            self.happiness += 60
+            cprint('{} купила шубу!!!'.format(self.name), color='green')
 
     def clean_house(self):
-        pass
+        self.house.mud -= 100
+        cprint('{} убралась дома!'.format(self.name), color='green')
 
 
 home = House()
