@@ -75,9 +75,16 @@ class Citizen:
 
     def eat(self):
         if self.house.food >= 30:
-            cprint('{} поел!'.format(self.name), color='green')
             self.house.food -= 30
             self.fullness += 30
+            return cprint('{} поел(а)!'.format(self.name), color='green')
+        else:
+            return
+
+    def pet_cat(self):
+        self.happiness += 10
+        cprint('{} гладит кота!'.format(self.name), color='green')
+        self.fullness -= 10
 
 
 class Husband(Citizen):
@@ -87,20 +94,19 @@ class Husband(Citizen):
 
     def act(self):
         home.mud += 5
+        dice = randint(1, 6)
         if home.mud > 90:
             self.happiness -= 10
-        if self.fullness <= 20:
+        elif self.fullness <= 20:
             self.eat()
-        dice = randint(1, 6)
-        if self.happiness <= 20:
+        elif self.happiness <= 20:
             self.gaming()
         elif dice == 1:
             self.work()
         elif dice == 2:
             self.gaming()
-
-    def eat(self):
-        super().eat()
+        else:
+            self.work()
 
     def work(self):
         cprint('{} сходил на работу!'.format(self.name), color='green')
@@ -120,24 +126,23 @@ class Wife(Citizen):
 
     def act(self):
         home.mud += 5
+        dice = randint(1, 6)
         if home.mud > 90:
             self.happiness -= 10
-        if self.fullness <= 20:
+        elif self.fullness <= 20:
             self.eat()
-        dice = randint(1, 6)
-        if self.house.food <= 30:
+        elif self.house.food <= 30:
             self.shopping()
-        if self.happiness <= 20:
+        elif self.happiness <= 20:
             self.buy_fur_coat()
-        elif self.house.mud >= 90:
+        elif self.house.mud >= 100:
             self.clean_house()
         elif dice == 1:
             self.shopping()
         elif dice == 2:
             self.buy_fur_coat()
-
-    def eat(self):
-        super().eat()
+        else:
+            self.pet_cat()
 
     def shopping(self):
         if self.house.money >= 10:
@@ -145,6 +150,8 @@ class Wife(Citizen):
             self.house.money -= 20
             self.house.food += 20
             self.fullness -= 10
+        else:
+            return
 
     def buy_fur_coat(self):
         if self.house.money >= 350:
@@ -153,6 +160,8 @@ class Wife(Citizen):
             self.happiness += 60
             self.fullness -= 10
             cprint('{} купила шубу!!!'.format(self.name), color='green')
+        else:
+            return
 
     def clean_house(self):
         self.house.mud -= 100
