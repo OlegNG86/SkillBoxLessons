@@ -79,13 +79,6 @@ class Citizen:
             self.house.food -= 30
             self.fullness += 30
 
-    def act(self):
-        home.mud += 5
-        if home.mud > 90:
-            self.happiness -= 10
-        elif self.fullness <= 20:
-            self.eat()
-
 
 class Husband(Citizen):
 
@@ -93,7 +86,11 @@ class Husband(Citizen):
         super().__init__(name)
 
     def act(self):
-        super().act()
+        home.mud += 5
+        if home.mud > 90:
+            self.happiness -= 10
+        if self.fullness <= 20:
+            self.eat()
         dice = randint(1, 6)
         if self.happiness <= 20:
             self.gaming()
@@ -122,7 +119,11 @@ class Wife(Citizen):
         super().__init__(name)
 
     def act(self):
-        super().act()
+        home.mud += 5
+        if home.mud > 90:
+            self.happiness -= 10
+        if self.fullness <= 20:
+            self.eat()
         dice = randint(1, 6)
         if self.house.food <= 30:
             self.shopping()
@@ -292,6 +293,7 @@ for day in range(365):
     cprint(masha, color='cyan')
     cprint(kolya, color='cyan')
     cprint(murzik, color='cyan')
+    cprint(home, color='cyan')
 
 # Усложненное задание (делать по желанию)
 #
