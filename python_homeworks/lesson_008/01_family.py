@@ -60,23 +60,18 @@ class Citizen:
 
     def __init__(self, name):
         self.name = name
-        self.fullness = 30
+        self.fullness = 50
         self.happiness = 100
         self.house = home
 
     def __str__(self):
-        if self.fullness <= 0:
-            return '{} умер от голода...'.format(self.name)
-        if self.happiness < 10:
-            return '{} умер от дипрессии...'.format(self.name)
-
-        else:
-            return 'Я - {}, я сыт на {}, я счастлив на {}'.format(self.name, self.fullness, self.happiness)
+        return 'Я - {}, я сыт на {}, я счастлив на {}'.format(self.name, self.fullness, self.happiness)
 
     def eat(self):
         if self.house.food >= 30:
             self.house.food -= 30
             self.fullness += 30
+            self.happiness += 10
             return cprint('{} поел(а)!'.format(self.name), color='green')
         else:
             return
@@ -93,11 +88,15 @@ class Husband(Citizen):
         super().__init__(name)
 
     def act(self):
+        if self.fullness <= 0:
+            return cprint('{} умер(ла)...'.format(self.name), color='red')
+        if self.happiness < 10:
+            return cprint('{} умер(ла) от депрессии...'.format(self.name), color='red')
         home.mud += 5
         dice = randint(1, 6)
         if home.mud > 90:
             self.happiness -= 10
-        elif self.fullness <= 20:
+        if self.fullness <= 20:
             self.eat()
         elif self.happiness <= 20:
             self.gaming()
@@ -106,7 +105,7 @@ class Husband(Citizen):
         elif dice == 2:
             self.gaming()
         else:
-            self.work()
+            self.pet_cat()
 
     def work(self):
         cprint('{} сходил на работу!'.format(self.name), color='green')
@@ -125,13 +124,16 @@ class Wife(Citizen):
         super().__init__(name)
 
     def act(self):
-        home.mud += 5
+        if self.fullness <= 0:
+            return cprint('{} умер(ла)...'.format(self.name), color='red')
+        if self.happiness < 10:
+            return cprint('{} умер(ла) от депрессии...'.format(self.name), color='red')
         dice = randint(1, 6)
         if home.mud > 90:
             self.happiness -= 10
-        elif self.fullness <= 20:
+        if self.fullness <= 20:
             self.eat()
-        elif self.house.food <= 30:
+        elif self.house.food <= 100:
             self.shopping()
         elif self.happiness <= 20:
             self.buy_fur_coat()
@@ -147,8 +149,8 @@ class Wife(Citizen):
     def shopping(self):
         if self.house.money >= 10:
             cprint('{} сходила в магазин!'.format(self.name), color='green')
-            self.house.money -= 20
-            self.house.food += 20
+            self.house.money -= 50
+            self.house.food += 50
             self.fullness -= 10
         else:
             return
