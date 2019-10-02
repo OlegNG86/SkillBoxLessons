@@ -109,7 +109,7 @@ class Husband(Citizen):
 
     def work(self):
         cprint('{} сходил на работу!'.format(self.name), color='green')
-        home.money += 150
+        home.money += 400
         self.fullness -= 10
 
     def gaming(self):
