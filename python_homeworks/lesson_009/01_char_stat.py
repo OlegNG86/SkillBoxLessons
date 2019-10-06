@@ -24,6 +24,31 @@ import os
 from pprint import pprint
 
 
+class Book:
+
+    def __init__(self, name):
+        self.name = name
+        self._text_from_book = None
+        self._opened_file = None
+
+    def format(self):
+        pass
+
+    def open(self):
+        pass
+
+    def read(self):
+        with open(self.name, 'r', encoding='utf8') as self._opened_file:
+            self._text_from_book = self._opened_file.read()
+            print(self._text_from_book)
+
+    def char_count(self):
+        pass
+
+    def char_sum(self):
+        pass
+
+
 folder = os.getcwd()
 # file_name = 'voyna-i-mir.txt.zip'
 file_name = 'pushkin.txt'
@@ -31,26 +56,23 @@ file_name = 'pushkin.txt'
 pushkin_folder = 'python_snippets'
 fullpath = os.path.join(folder, pushkin_folder, file_name)
 
-with open(fullpath, 'r', encoding='utf8') as opened_file:
-    text_from_pushkin = opened_file.read()
-    print(text_from_pushkin)
+pushkin_book = Book(fullpath)
+pushkin_book.open()
+pushkin_book.read()
 
-sum_all_char = 0
-char_dict = {}
+# with open(fullpath, 'r', encoding='utf8') as opened_file:
+#     text_from_pushkin = opened_file.read()
+#     print(text_from_pushkin)
 
-for i in range(1040, 1104):
-    char = chr(i)
-    char_count = text_from_pushkin.count(char)
-    sum_all_char += char_count
-    char_dict[char] = char_count
-print(char_dict)
-
-
-
-
-
-
-
+# sum_all_char = 0
+# char_dict = {}
+#
+# for i in range(1040, 1104):
+#     char = chr(i)
+#     char_count = text_from_pushkin.count(char)
+#     sum_all_char += char_count
+#     char_dict[char] = char_count
+# print(char_dict)
 
 
 # После выполнения первого этапа нужно сделать упорядочивание статистики
