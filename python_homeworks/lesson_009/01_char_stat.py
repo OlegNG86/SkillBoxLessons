@@ -25,7 +25,6 @@ from pprint import pprint
 
 
 class Book:
-
     total_sum = 0
 
     def __init__(self, name):
@@ -33,7 +32,7 @@ class Book:
         self.text_from_pushkin = None
 
     def read(self):
-        with open(self.name, 'r', encoding='utf8') as self.opened_file:
+        with open(self.name, 'r', encoding='cp1251') as self.opened_file:
             self.text_from_pushkin = self.opened_file.read()
             return self.text_from_pushkin
 
@@ -45,9 +44,18 @@ class Book:
             char_dict[char] = char_count
         return char_dict
 
+    def sum_all_char(self):
+        sum_all_char = 0
+        for i in range(1040, 1104):
+            char = chr(i)
+            char_count = self.text_from_pushkin.count(char)
+            sum_all_char += char_count
+        return sum_all_char
+
+
 folder = os.getcwd()
-# file_name = 'voyna-i-mir.txt.zip'
-file_name = 'pushkin.txt'
+file_name = 'voyna-i-mir.txt'
+# file_name = 'pushkin.txt'
 
 pushkin_folder = 'python_snippets'
 fullpath = os.path.join(folder, pushkin_folder, file_name)
@@ -55,14 +63,10 @@ fullpath = os.path.join(folder, pushkin_folder, file_name)
 pushkin_file = Book(fullpath)
 pushkin_file.read()
 print(pushkin_file.char_count())
+print(pushkin_file.sum_all_char())
 
 sum_all_char = 0
 char_dict = {}
-
-
-
-
-
 
 # После выполнения первого этапа нужно сделать упорядочивание статистики
 #  - по частоте по возрастанию
