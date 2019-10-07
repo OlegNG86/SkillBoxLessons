@@ -27,12 +27,13 @@ from pprint import pprint
 class Book:
     total_sum = 0
 
-    def __init__(self, name):
+    def __init__(self, name, encoding):
         self.name = name
         self.text_from_pushkin = None
+        self.encoding = encoding
 
     def read(self):
-        with open(self.name, 'r', encoding='cp1251') as self.opened_file:
+        with open(self.name, 'r', encoding=self.encoding) as self.opened_file:
             self.text_from_pushkin = self.opened_file.read()
             return self.text_from_pushkin
 
@@ -54,16 +55,36 @@ class Book:
 
 
 folder = os.getcwd()
-file_name = 'voyna-i-mir.txt'
-# file_name = 'pushkin.txt'
+file_name_pushkin = 'pushkin.txt'
+file_name_voina = 'voyna-i-mir.txt'
 
-pushkin_folder = 'python_snippets'
-fullpath = os.path.join(folder, pushkin_folder, file_name)
+file_folder = 'python_snippets'
+fullpath_pushkin = os.path.join(folder, file_folder, file_name_pushkin)
+fullpath_voina = os.path.join(folder, file_folder, file_name_voina)
 
-pushkin_file = Book(fullpath)
+pushkin_file = Book(fullpath_pushkin, 'utf8')
+voina_i_mir = Book(fullpath_voina, 'cp1251')
 pushkin_file.read()
-print(pushkin_file.char_count())
-print(pushkin_file.sum_all_char())
+voina_i_mir.read()
+
+# print(pushkin_file.char_count())
+# print(pushkin_file.sum_all_char())
+#
+# print(voina_i_mir.char_count())
+# print(voina_i_mir.sum_all_char())
+
+print('+---------+----------+')
+print('|  буква  | частота  |')
+print('+---------+----------+')
+
+for k, v in voina_i_mir.char_count().items():
+
+    print(f'|{k:^9}|{v:^10}|')
+print('+---------+----------+')
+print(f'|  итого  | {voina_i_mir.sum_all_char()}  |')
+print('+---------+----------+')
+
+
 
 sum_all_char = 0
 char_dict = {}
