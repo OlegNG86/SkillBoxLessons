@@ -24,6 +24,27 @@ import os
 from pprint import pprint
 
 
+class Book:
+
+    total_sum = 0
+
+    def __init__(self, name):
+        self.name = name
+        self.text_from_pushkin = None
+
+    def read(self):
+        with open(self.name, 'r', encoding='utf8') as self.opened_file:
+            self.text_from_pushkin = self.opened_file.read()
+            return self.text_from_pushkin
+
+    def char_count(self):
+        char_dict = {}
+        for i in range(1040, 1104):
+            char = chr(i)
+            char_count = self.text_from_pushkin.count(char)
+            char_dict[char] = char_count
+        return char_dict
+
 folder = os.getcwd()
 # file_name = 'voyna-i-mir.txt.zip'
 file_name = 'pushkin.txt'
@@ -31,22 +52,12 @@ file_name = 'pushkin.txt'
 pushkin_folder = 'python_snippets'
 fullpath = os.path.join(folder, pushkin_folder, file_name)
 
-with open(fullpath, 'r', encoding='utf8') as opened_file:
-    text_from_pushkin = opened_file.read()
-    print(text_from_pushkin)
+pushkin_file = Book(fullpath)
+pushkin_file.read()
+print(pushkin_file.char_count())
 
 sum_all_char = 0
 char_dict = {}
-
-for i in range(1040, 1104):
-    char = chr(i)
-    char_count = text_from_pushkin.count(char)
-    sum_all_char += char_count
-    char_dict[char] = char_count
-print(char_dict)
-
-
-
 
 
 
