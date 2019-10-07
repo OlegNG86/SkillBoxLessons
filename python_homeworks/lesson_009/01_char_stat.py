@@ -21,6 +21,7 @@
 # Упорядочивание по частоте - по убыванию. Ширину таблицы подберите по своему вкусу
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 import os
+import operator
 from pprint import pprint
 
 
@@ -78,16 +79,25 @@ print('|  буква  | частота  |')
 print('+---------+----------+')
 
 for k, v in voina_i_mir.char_count().items():
-
     print(f'|{k:^9}|{v:^10}|')
+
 print('+---------+----------+')
 print(f'|  итого  | {voina_i_mir.sum_all_char()}  |')
 print('+---------+----------+')
 
+#  - по частоте по возрастанию
+sorted_x = sorted(voina_i_mir.char_count().items(), key=operator.itemgetter(1), reverse=False)
+print(sorted_x)
+
+#  - по алфавиту по возрастанию
+sorted_x = sorted(voina_i_mir.char_count().items(), key=operator.itemgetter(0), reverse=False)
+print(sorted_x)
+
+#  - по алфавиту по убыванию
+sorted_x = sorted(voina_i_mir.char_count().items(), key=operator.itemgetter(0), reverse=True)
+print(sorted_x)
 
 
-sum_all_char = 0
-char_dict = {}
 
 # После выполнения первого этапа нужно сделать упорядочивание статистики
 #  - по частоте по возрастанию
