@@ -18,12 +18,22 @@
 #
 # Входные параметры: файл для анализа, файл результата
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
+import datetime
+
 
 file = 'events.txt'
 nok = 'NOK'
+variable1 = 0
 
 with open(file, 'r') as f:
-    print(f.read().count(nok))
+    for line in f.readlines():
+        i, j = line.replace('[', '').split(sep=']')
+        i = i.strip()
+        time = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S.%f')
+        print(time)
+        # time.minute += 1
+# print(variable1)
+        # print(i)
 
 # После выполнения первого этапа нужно сделать группировку событий
 #  - по часам
