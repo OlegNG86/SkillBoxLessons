@@ -19,22 +19,38 @@
 # Входные параметры: файл для анализа, файл результата
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 import datetime
+from itertools import groupby
 
 
-file = 'events.txt'
-nok = 'NOK'
-variable1 = 0
+class CountFile:
+    count = 0
+    newlist = []
 
-with open(file, 'r') as f:
-    for line in f.readlines():
-        i, j = line.replace('[', '').split(sep=']')
-        date = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S.%f')
-        date += datetime.timedelta(minutes=1)
-        if 'NOK' in j:
-            print(date.strftime('%d/%m/%y %H:%M'), j)
-        # time.minute += 1
-# print(variable1)
-        # print(i)
+    def __init__(self, name, other_name, sort_parameter):
+        self.name = name
+        self.other_name = other_name
+        self.sort_parameter = sort_parameter
+
+    def sort(self):
+        with open(self.name, 'r') as f:
+            for i in f.readlines():
+                k, j = i.strip().replace('[', '').split('] ')
+                if j == self.sort_parameter:
+                    constant = k[:16]
+                    CountFile.count += 1
+                    if constant not in CountFile.newlist:
+                        CountFile.newlist.append(f'[{constant}] {CountFile.count}')
+        return CountFile.newlist
+
+    def show_sort(self):
+        for i in CountFile.newlist:
+            print(i)
+
+
+file = CountFile('events.txt', 'otherfile.txt', 'NOK')
+file.sort()
+file.show_sort()
+
 
 # После выполнения первого этапа нужно сделать группировку событий
 #  - по часам
