@@ -28,9 +28,10 @@ variable1 = 0
 with open(file, 'r') as f:
     for line in f.readlines():
         i, j = line.replace('[', '').split(sep=']')
-        i = i.strip()
-        time = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S.%f')
-        print(time)
+        date = datetime.datetime.strptime(i, '%Y-%m-%d %H:%M:%S.%f')
+        date += datetime.timedelta(minutes=1)
+        if 'NOK' in j:
+            print(date.strftime('%d/%m/%y %H:%M'), j)
         # time.minute += 1
 # print(variable1)
         # print(i)
