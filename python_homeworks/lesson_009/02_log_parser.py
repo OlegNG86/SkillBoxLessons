@@ -46,10 +46,16 @@ class CountFile:
         for i in CountFile.newlist:
             print(i)
 
+    def write_file(self):
+        with open(self.other_name, 'w') as f:
+            for i in CountFile.newlist:
+                f.writelines(i + '\n')
+
 
 file = CountFile('events.txt', 'otherfile.txt', 'NOK')
 file.sort()
 file.show_sort()
+file.write_file()
 
 
 # После выполнения первого этапа нужно сделать группировку событий
