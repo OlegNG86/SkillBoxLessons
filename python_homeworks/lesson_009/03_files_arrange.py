@@ -34,7 +34,29 @@ import os, time, shutil
 # Чтение документации/гугла по функциям - приветствуется. Как и поиск альтернативных вариантов :)
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 
-# TODO здесь ваш код
+
+class SortedFile:
+
+    def __init__(self, folder_path):
+        self.folder_path = folder_path
+
+    def inspect(self):
+        walking = os.walk(self.folder_path)
+        for dirpath, dirnames, filenames in walking:
+            # print(dirpath, dirnames, filenames)
+            for file in filenames:
+                file_path = dirpath + file
+                print(file_path)
+
+
+path = os.getcwd()
+sort_path = 'icons/icons'
+fullpath = os.path.join(path, sort_path)
+normalized_path = os.path.normpath(fullpath)
+
+search = SortedFile(normalized_path)
+search.inspect()
+
 
 # Усложненное задание (делать по желанию)
 # Нужно обрабатывать zip-файл, содержащий фотографии, без предварительного извлечения файлов в папку.
