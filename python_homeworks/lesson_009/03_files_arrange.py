@@ -48,8 +48,11 @@ class SortedFile:
         print(os.path.dirname(self.folder_path))
         if '.zip' in self.folder_path:
             with zipfile.ZipFile(self.folder_path) as zip_ref:
+                for file in zip_ref.namelist():
+                    print(file)
                 self.folder_path = self.folder_path.replace('.zip', '')
-                zip_ref.extractall(self.folder_path)
+
+                #('icons/status/weather-storm.png').date_time)
                 self.get_file_path()
         else:
             self.get_file_path()
