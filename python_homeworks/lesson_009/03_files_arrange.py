@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os, time, shutil
+import os, time, shutil, zipfile
+
 
 
 # Нужно написать скрипт для упорядочивания фотографий (вообще любых файлов)
@@ -41,6 +42,17 @@ class SortedFile:
     def __init__(self, folder_path):
         self.folder_path = folder_path
         self.newdict = {}
+        self.try_zip()
+
+    def try_zip(self):
+        print(os.path.dirname(self.folder_path))
+        if '.zip' in self.folder_path:
+            with zipfile.ZipFile(self.folder_path) as zip_ref:
+                self.folder_path = self.folder_path.replace('.zip', '')
+                zip_ref.extractall(self.folder_path)
+                self.get_file_path()
+        else:
+            self.get_file_path()
 
     def get_file_path(self):
         walking = os.walk(self.folder_path)
@@ -63,7 +75,6 @@ class SortedFile:
         return self.newdict
 
     def copy_files(self):
-        print(self.folder_path)
         for k, v in self.newdict.items():
             newdir = 'sort_by_year'
             sort_file_folder = os.path.normpath(f'{v[2][0]}/{v[2][1]}')
@@ -87,17 +98,18 @@ class SortedFile:
 
 
 path = os.getcwd()
-sort_path = 'icons/icons'
+sort_path = 'icons.zip'
 fullpath = os.path.join(path, sort_path)
 normalized_path = os.path.normpath(fullpath)
 
 search = SortedFile(normalized_path)
 
-# search.show_path_of_the_source_file()
+search.show_path_of_the_source_file()
 
 search.add_time_in_newdict()
 search.copy_files()
-search.count_files()
+# search.count_files()
+search.try_zip()
 
 
 # Усложненное задание (делать по желанию)
