@@ -2,6 +2,7 @@
 
 import os, time, shutil
 
+
 # Нужно написать скрипт для упорядочивания фотографий (вообще любых файлов)
 # Скрипт должен разложить файлы из одной папки по годам и месяцам в другую.
 # Например, так:
@@ -75,6 +76,12 @@ class SortedFile:
             if not os.path.exists(new_file_path):
                 shutil.copy(k, new_file_path)
 
+    def count_files(self):
+        count = 0
+        for i in self.newdict.keys():
+            count += 1
+        print(count)
+
 
 
 
@@ -85,11 +92,12 @@ fullpath = os.path.join(path, sort_path)
 normalized_path = os.path.normpath(fullpath)
 
 search = SortedFile(normalized_path)
-print(search.get_file_path())
+
 # search.show_path_of_the_source_file()
 
 search.add_time_in_newdict()
 search.copy_files()
+search.count_files()
 
 
 # Усложненное задание (делать по желанию)
