@@ -39,14 +39,44 @@ class SortedFile:
 
     def __init__(self, folder_path):
         self.folder_path = folder_path
+        self.newdict = {}
 
-    def inspect(self):
+    def get_file_path(self):
         walking = os.walk(self.folder_path)
         for dirpath, dirnames, filenames in walking:
-            # print(dirpath, dirnames, filenames)
             for file in filenames:
-                file_path = dirpath + file
-                print(file_path)
+                file_dir = dirpath + '\\'
+                file_path = file_dir + file
+                self.newdict[file_path] = [file_path, file]
+        return self.newdict
+
+    def show_path_of_the_source_file(self):
+        for i in self.newdict.keys():
+            print(i)
+
+    def add_time_in_newdict(self):
+        for k, v in self.get_file_path().items():
+            get_time = os.path.getmtime(k)
+            gm_time = time.gmtime(get_time)
+            v.append(gm_time)
+        return self.newdict
+
+    def copy_files(self):
+        print(self.folder_path)
+        for k, v in self.newdict.items():
+            newdir = 'sort_by_year'
+            sort_file_folder = os.path.normpath(f'{v[2][0]}/{v[2][1]}')
+            fullpath = os.path.join(self.folder_path, newdir, sort_file_folder)
+            norm_path = os.path.normpath(fullpath)
+            new_file_path = os.path.join(norm_path, v[1])
+
+            if not os.path.exists(norm_path):
+                os.makedirs(norm_path)
+            if not os.path.exists(new_file_path):
+                shutil.copy(k, new_file_path)
+
+
+
 
 
 path = os.getcwd()
@@ -55,7 +85,11 @@ fullpath = os.path.join(path, sort_path)
 normalized_path = os.path.normpath(fullpath)
 
 search = SortedFile(normalized_path)
-search.inspect()
+print(search.get_file_path())
+# search.show_path_of_the_source_file()
+
+search.add_time_in_newdict()
+search.copy_files()
 
 
 # Усложненное задание (делать по желанию)
