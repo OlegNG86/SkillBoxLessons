@@ -78,7 +78,7 @@ class SortedFile:
 
     def count_files(self):
         count = 0
-        for i in self.newdict.keys():
+        for _ in self.newdict.keys():
             count += 1
         print(count)
 
