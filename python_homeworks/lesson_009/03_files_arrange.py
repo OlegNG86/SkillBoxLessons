@@ -38,8 +38,8 @@ import os, time, shutil, zipfile
 
 class SortedFile:
 
-    def __init__(self, folder_path):
-        self.newdir = 'sort_by_year'
+    def __init__(self, folder_path, current_dir):
+        self.newdir = current_dir
         self.newdict = {}
         if zipfile.is_zipfile(folder_path):
             self.zip_path = folder_path
@@ -120,7 +120,7 @@ sort_path = 'icons.zip'
 fullpath = os.path.join(path, sort_path)
 normalized_path = os.path.normpath(fullpath)
 
-search = SortedFile(normalized_path)
+search = SortedFile(normalized_path, 'sort_by_year')
 
 # search.show_path_of_the_source_file()
 # search.get_file_path()
