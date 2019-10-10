@@ -40,27 +40,30 @@ import os, time, shutil, zipfile
 class SortedFile:
 
     def __init__(self, folder_path):
-        self.folder_path = folder_path
         self.newdict = {}
-        self.try_zip()
+        if zipfile.is_zipfile(folder_path):
+            self.zip_path = folder_path
+            self.folder_path = os.path.dirname(folder_path)
+            print(self.zip_path, self.folder_path)
+            self.try_zip()
+        else:
+            self.folder_path = folder_path
+            self.get_file_path()
+
+
 
     def try_zip(self):
-        print(os.path.dirname(self.folder_path))
-        if zipfile.is_zipfile(self.folder_path):
-            with zipfile.ZipFile(self.folder_path) as zip_ref:
-                self.folder_path = self.folder_path.replace('.zip', '')
-                for file in zip_ref.namelist():
-                    full_file_path = os.path.normpath(os.path.join(self.folder_path, file))
-                    if os.path.isfile(full_file_path):
-                        file_name = file
-                        date_time_file = zip_ref.getinfo(file).date_time
-                        self.newdict[str(full_file_path)] = [str(full_file_path), file_name, date_time_file]
-                print(self.newdict)
+        with zipfile.ZipFile(self.zip_path) as zip_ref:
+            for file in zip_ref.namelist():
+                full_file_path = os.path.normpath(os.path.join(self.folder_path, file))
+                if '.png' in full_file_path:
+                    file_name = file
+                    date_time_file = zip_ref.getinfo(file).date_time
+                    self.newdict[str(full_file_path)] = [str(full_file_path), file_name, date_time_file]
+            return self.newdict
 
-                #('icons/status/weather-storm.png').date_time)
-                # self.get_file_path()
-        else:
-            self.get_file_path()
+    def zip_extract(self):
+        pass
 
     def get_file_path(self):
         walking = os.walk(self.folder_path)
@@ -83,7 +86,6 @@ class SortedFile:
         return self.newdict
 
     def copy_files(self):
-        print(self.newdict)
         for k, v in self.newdict.items():
             newdir = 'sort_by_year'
             sort_file_folder = os.path.normpath(f'{v[2][0]}/{v[2][1]}')
@@ -95,6 +97,21 @@ class SortedFile:
                 os.makedirs(norm_path)
             if not os.path.exists(new_file_path):
                 shutil.copy2(k, new_file_path)
+
+    def extract_files_from_zip(self):
+        print(self.newdict)
+        for k, v in self.newdict.items():
+            newdir = 'sort_by_year'
+            sort_file_folder = os.path.normpath(f'{v[2][0]}/{v[2][1]}')
+            fullpath = os.path.join(self.folder_path, newdir, sort_file_folder)
+            norm_path = os.path.normpath(fullpath)
+            # new_file_path = os.path.join(norm_path, v[1])
+            print(norm_path)
+            if not os.path.exists(norm_path):
+                os.makedirs(norm_path)
+            # if not os.path.exists(new_file_path):
+                with zipfile.ZipFile(self.zip_path, 'r') as zip_ref:
+                    zip_ref.extract(v[1], norm_path)
 
     def count_files(self):
         count = 0
@@ -119,6 +136,7 @@ search = SortedFile(normalized_path)
 # search.copy_files()
 # search.count_files()
 search.try_zip()
+search.extract_files_from_zip()
 
 
 # Усложненное задание (делать по желанию)
