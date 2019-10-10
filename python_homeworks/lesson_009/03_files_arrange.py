@@ -3,7 +3,6 @@
 import os, time, shutil, zipfile
 
 
-
 # Нужно написать скрипт для упорядочивания фотографий (вообще любых файлов)
 # Скрипт должен разложить файлы из одной папки по годам и месяцам в другую.
 # Например, так:
@@ -40,19 +39,17 @@ import os, time, shutil, zipfile
 class SortedFile:
 
     def __init__(self, folder_path):
+        self.newdir = 'sort_by_year'
         self.newdict = {}
         if zipfile.is_zipfile(folder_path):
             self.zip_path = folder_path
             self.folder_path = os.path.dirname(folder_path)
-            print(self.zip_path, self.folder_path)
-            self.try_zip()
+            self._try_zip()
         else:
             self.folder_path = folder_path
             self.get_file_path()
 
-
-
-    def try_zip(self):
+    def _try_zip(self):
         with zipfile.ZipFile(self.zip_path) as zip_ref:
             for file in zip_ref.namelist():
                 full_file_path = os.path.normpath(os.path.join(self.folder_path, file))
@@ -60,10 +57,7 @@ class SortedFile:
                     file_name = file
                     date_time_file = zip_ref.getinfo(file).date_time
                     self.newdict[str(full_file_path)] = [str(full_file_path), file_name, date_time_file]
-            return self.newdict
-
-    def zip_extract(self):
-        pass
+            self._extract_files_from_zip()
 
     def get_file_path(self):
         walking = os.walk(self.folder_path)
@@ -72,24 +66,25 @@ class SortedFile:
                 file_dir = dirpath + '\\'
                 file_path = file_dir + file
                 self.newdict[file_path] = [file_path, file]
-        return self.newdict
+        self.add_time_in_newdict()
 
     def show_path_of_the_source_file(self):
         for i in self.newdict.keys():
             print(i)
 
     def add_time_in_newdict(self):
-        for k, v in self.get_file_path().items():
+        for k, v in self.newdict.items():
             get_time = os.path.getmtime(k)
             gm_time = time.gmtime(get_time)
             v.append(gm_time)
-        return self.newdict
+        self.copy_files()
 
     def copy_files(self):
         for k, v in self.newdict.items():
-            newdir = 'sort_by_year'
+            print(v)
             sort_file_folder = os.path.normpath(f'{v[2][0]}/{v[2][1]}')
-            fullpath = os.path.join(self.folder_path, newdir, sort_file_folder)
+            print(sort_file_folder)
+            fullpath = os.path.join(self.folder_path, self.newdir, sort_file_folder)
             norm_path = os.path.normpath(fullpath)
             new_file_path = os.path.join(norm_path, v[1])
 
@@ -98,29 +93,26 @@ class SortedFile:
             if not os.path.exists(new_file_path):
                 shutil.copy2(k, new_file_path)
 
-    def extract_files_from_zip(self):
-        print(self.newdict)
+    def _extract_files_from_zip(self):
         for k, v in self.newdict.items():
-            newdir = 'sort_by_year'
             sort_file_folder = os.path.normpath(f'{v[2][0]}/{v[2][1]}')
-            fullpath = os.path.join(self.folder_path, newdir, sort_file_folder)
+            fullpath = os.path.join(self.folder_path, self.newdir, sort_file_folder)
             norm_path = os.path.normpath(fullpath)
-            # new_file_path = os.path.join(norm_path, v[1])
-            print(norm_path)
             if not os.path.exists(norm_path):
                 os.makedirs(norm_path)
-            # if not os.path.exists(new_file_path):
-                with zipfile.ZipFile(self.zip_path, 'r') as zip_ref:
-                    zip_ref.extract(v[1], norm_path)
+            with zipfile.ZipFile(self.zip_path, 'r') as zip_ref:
+                file_in_zip_archive = v[1]
+                print(file_in_zip_archive)
+                read_file = zip_ref.read(file_in_zip_archive)
+                new_file_path = os.path.join(norm_path, os.path.basename(file_in_zip_archive))
+                with open(new_file_path, 'wb') as write_file:
+                    write_file.write(read_file)
 
     def count_files(self):
         count = 0
         for _ in self.newdict.keys():
             count += 1
         print(count)
-
-
-
 
 
 path = os.getcwd()
@@ -135,8 +127,6 @@ search = SortedFile(normalized_path)
 # search.add_time_in_newdict()
 # search.copy_files()
 # search.count_files()
-search.try_zip()
-search.extract_files_from_zip()
 
 
 # Усложненное задание (делать по желанию)
