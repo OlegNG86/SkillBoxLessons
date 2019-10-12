@@ -23,10 +23,6 @@
 # Вызов метода обернуть в try-except.
 
 
-class ValueError(Exception):
-    pass
-
-
 class NotNameError(Exception):
     pass
 
@@ -39,6 +35,7 @@ class FileChecker:
 
     def __init__(self, name):
         self.name = name
+        self.data = None
         self.user_age = None
         self.user_age_check = 10 > self.user_age > 99
         self.user_name = None
@@ -51,13 +48,24 @@ class FileChecker:
 
     def open_file(self):
         with open(self.name, 'r', encoding='utf8') as f:
-            data = f.read()
-        return data
+            self.data = f.read()
+        return self.data
 
     def check_file(self):
-        pass
+        if not self.user_name_check:
+            raise NotNameError('В имени не только буквы.')
+        if not self.user_email_check:
+            raise NotEmailError('Адрес почты указан некорректно.')
+        if not self.user_age_check:
+            raise ValueError('Возраст указан некорректно.')
 
+        try:
+            for self.user_name, self.user_email, self.user_age in self.data.split(sep=' '):
+                print(self.user_name)
+        except:
+            print('Была ошибка')
 
 file_name = 'registrations.txt'
 file1 = FileChecker(file_name)
-print(file1.open_file())
+file1.open_file()
+file1.check_file()
