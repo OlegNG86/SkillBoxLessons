@@ -20,11 +20,37 @@
 from random import randint
 from random import choice
 
+
+class IamGodError(Exception):
+    pass
+
+
+class DrunkError(Exception):
+    pass
+
+
+class CarCrashError(Exception):
+    pass
+
+
+class GluttonyError(Exception):
+    pass
+
+
+class DepressionError(Exception):
+    pass
+
+
+class SuicideError(Exception):
+    pass
+
+
 ENLIGHTENMENT_CARMA_LEVEL = 777
 
 
 def one_day():
     CARMA_LEVEL = 0
+    log_exception_cacher = []
     while CARMA_LEVEL < ENLIGHTENMENT_CARMA_LEVEL:
         rand_carma = randint(1, 7)
         CARMA_LEVEL += rand_carma
@@ -35,13 +61,39 @@ def one_day():
                       'DepressionError',
                       'SuicideError']
         rand_choice = randint(1, 13)
-        if rand_choice == 1:
-            rand_exception = choice(exceptions)
-        else:
-            rand_exception = None
-    return CARMA_LEVEL, rand_exception
+        try:
+            if rand_choice == 1:
+                rand_exception = choice(exceptions)
+                log_exception_cacher.append(rand_exception)
+                if rand_exception == 'IamGodError':
+                    raise IamGodError('Режим бога')
+                if rand_exception == 'DrunkError':
+                    raise DrunkError('Пьяный')
+                if rand_exception == 'CarCrashError':
+                    raise CarCrashError('Разбитая машина')
+                if rand_exception == 'GluttonyError':
+                    raise GluttonyError('Обжора')
+                if rand_exception == 'DepressionError':
+                    raise DepressionError('Дипрессия')
+                if rand_exception == 'SuicideError':
+                    raise SuicideError('Самоубийца')
+        except IamGodError as exc:
+            print(f'поймана ошибка {exc}!')
+        except DrunkError as exc:
+            print(f'поймана ошибка {exc}!')
+        except CarCrashError as exc:
+            print(f'поймана ошибка {exc}!')
+        except GluttonyError as exc:
+            print(f'поймана ошибка {exc}!')
+        except DepressionError as exc:
+            print(f'поймана ошибка {exc}!')
+        except SuicideError as exc:
+            print(f'поймана ошибка {exc}!')
+
+    print(f'Уровень кармы {CARMA_LEVEL}, пойманных исключений {len(log_exception_cacher)}, '
+          f'а именно {log_exception_cacher}')
 
 
-print(one_day())
+one_day()
 
 # https://goo.gl/JnsDqu
