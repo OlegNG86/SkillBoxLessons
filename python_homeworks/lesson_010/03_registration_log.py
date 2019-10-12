@@ -39,6 +39,12 @@ class FileChecker:
 
     def __init__(self, name):
         self.name = name
+        self.user_age = None
+        self.user_age_check = 10 > self.user_age > 99
+        self.user_name = None
+        self.user_name_check = str.isalpha(self.user_name)
+        self.user_email = None
+        self.user_email_check = '@' and '.' in self.user_email
 
     def __str__(self):
         return f'Запущен файл {self.name}'
@@ -47,6 +53,9 @@ class FileChecker:
         with open(self.name, 'r', encoding='utf8') as f:
             data = f.read()
         return data
+
+    def check_file(self):
+        pass
 
 
 file_name = 'registrations.txt'
