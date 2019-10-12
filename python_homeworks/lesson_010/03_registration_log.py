@@ -36,12 +36,12 @@ class FileChecker:
     def __init__(self, name):
         self.name = name
         self.data = None
-        self.user_age = None
-        self.user_age_check = 10 > self.user_age > 99
+        self.user_age = 0
+        self.user_age_check = isinstance(10 < self.user_age < 99, int)
         self.user_name = None
-        self.user_name_check = str.isalpha(self.user_name)
+        self.user_name_check = isinstance(self.user_name, str)
         self.user_email = None
-        self.user_email_check = '@' and '.' in self.user_email
+        self.user_email_check = '@' in self.user_email and '.' in self.user_email
 
     def __str__(self):
         return f'Запущен файл {self.name}'
@@ -52,18 +52,20 @@ class FileChecker:
         return self.data
 
     def check_file(self):
-        if not self.user_name_check:
-            raise NotNameError('В имени не только буквы.')
-        if not self.user_email_check:
-            raise NotEmailError('Адрес почты указан некорректно.')
-        if not self.user_age_check:
-            raise ValueError('Возраст указан некорректно.')
 
         try:
             for self.user_name, self.user_email, self.user_age in self.data.split(sep=' '):
                 print(self.user_name)
+
+                if not self.user_name_check:
+                    raise NotNameError('В имени не только буквы.')
+                if not self.user_email_check:
+                    raise NotEmailError('Адрес почты указан некорректно.')
+                if not self.user_age_check:
+                    raise ValueError('Возраст указан некорректно.')
         except:
             print('Была ошибка')
+
 
 file_name = 'registrations.txt'
 file1 = FileChecker(file_name)
