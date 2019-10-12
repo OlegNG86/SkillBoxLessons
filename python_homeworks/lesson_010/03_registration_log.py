@@ -22,4 +22,29 @@
 # - поле возраст НЕ является числом от 10 до 99: ValueError
 # Вызов метода обернуть в try-except.
 
-# TODO здесь ваш код
+
+class ValueError(Exception):
+    pass
+
+
+class NotNameError(Exception):
+    pass
+
+
+class NotEmailError(Exception):
+    pass
+
+
+class FileChecker:
+
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return f'Запущен файл {self.name}'
+
+    def check_file(self):
+        with open(self.name, 'r') as f:
+            data = f.read()
+        return data
+
