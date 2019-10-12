@@ -49,6 +49,8 @@ ENLIGHTENMENT_CARMA_LEVEL = 777
 
 
 def one_day():
+    with open('log_of_exceptions.txt', 'w') as text_file:
+        text_file.write('')
     CARMA_LEVEL = 0
     log_exception_cacher = []
     while CARMA_LEVEL < ENLIGHTENMENT_CARMA_LEVEL:
@@ -65,6 +67,8 @@ def one_day():
             if rand_choice == 1:
                 rand_exception = choice(exceptions)
                 log_exception_cacher.append(rand_exception)
+                with open('log_of_exceptions.txt', 'a') as text_file:
+                    text_file.write(rand_exception + '\n')
                 if rand_exception == 'IamGodError':
                     raise IamGodError('Режим бога')
                 if rand_exception == 'DrunkError':
