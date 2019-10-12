@@ -22,16 +22,25 @@ from random import choice
 
 ENLIGHTENMENT_CARMA_LEVEL = 777
 
+
 def one_day():
-    rand_carma = randint(1, 7)
-    exceptions = ['IamGodError',
-                  'DrunkError',
-                  'CarCrashError',
-                  'GluttonyError',
-                  'DepressionError',
-                  'SuicideError']
-    rand_exception = choice(exceptions)
-    return rand_carma, rand_exception
+    CARMA_LEVEL = 0
+    while CARMA_LEVEL < ENLIGHTENMENT_CARMA_LEVEL:
+        rand_carma = randint(1, 7)
+        CARMA_LEVEL += rand_carma
+        exceptions = ['IamGodError',
+                      'DrunkError',
+                      'CarCrashError',
+                      'GluttonyError',
+                      'DepressionError',
+                      'SuicideError']
+        rand_choice = randint(1, 13)
+        if rand_choice == 1:
+            rand_exception = choice(exceptions)
+        else:
+            rand_exception = None
+    return CARMA_LEVEL, rand_exception
+
 
 print(one_day())
 
