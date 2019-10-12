@@ -43,8 +43,12 @@ class FileChecker:
     def __str__(self):
         return f'Запущен файл {self.name}'
 
-    def check_file(self):
-        with open(self.name, 'r') as f:
+    def open_file(self):
+        with open(self.name, 'r', encoding='utf8') as f:
             data = f.read()
         return data
 
+
+file_name = 'registrations.txt'
+file1 = FileChecker(file_name)
+print(file1.open_file())
