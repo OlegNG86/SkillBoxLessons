@@ -17,8 +17,22 @@
 # При создании собственных исключений максимально использовать функциональность
 # базовых встроенных исключений.
 
+from random import randint
+from random import choice
+
 ENLIGHTENMENT_CARMA_LEVEL = 777
 
-# TODO здесь ваш код
+def one_day():
+    rand_carma = randint(1, 7)
+    exceptions = ['IamGodError',
+                  'DrunkError',
+                  'CarCrashError',
+                  'GluttonyError',
+                  'DepressionError',
+                  'SuicideError']
+    rand_exception = choice(exceptions)
+    return rand_carma, rand_exception
+
+print(one_day())
 
 # https://goo.gl/JnsDqu
