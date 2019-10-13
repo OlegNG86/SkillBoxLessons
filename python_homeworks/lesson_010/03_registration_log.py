@@ -40,14 +40,12 @@ class FileChecker:
         self.new_name_file = None
         self.data = None
         self.user_age = None
-        self.user_age_check = False if self.user_age == None \
-            else len(re.findall(r'\b[1-9]{1}[0-9]{1}', self.user_age)) >= 1
+        self.user_age_check = r'\b[1-9]{1}[0-9]{1}'
         self.user_name = None
-        self.user_name_check = False if self.user_age == None \
-            else len(re.findall(r'\b[A-Z][A-z]*[А-Я][А-я]*', self.user_age)) >= 1
+        self.user_name_check = r'\b[A-Z][A-z]*[А-Я][А-я]*'
         self.user_email = None
-        self.user_email_check = False if self.user_age == None \
-            else len(re.findall(r'\b[a-z]*[.]*[a-z]*@\w*\.\w*', self.user_email)) >= 1
+        self.user_email_check = r'\b[a-z]*[.]*[a-z]*@\w*\.\w*'
+        self.pattern = re.compile(self.user_name_check+str([ ])+self.user_email_check+str([ ])+self.user_age_check)
 
     def __str__(self):
         return f'Запущен файл {self.name}'
@@ -64,28 +62,40 @@ class FileChecker:
             f.writelines(self.data)
 
     def check_file(self):
-        bad_list = []
-        try:
+        # bad_list = []
+
             for i in self.data:
-                if len(i.split(sep=' ')) == 3:
-                    self.user_name, self.user_email, self.user_age = i.split(sep=' ')
-                    # print(self.user_name, self.user_email, self.user_age)
+                try:
 
-                    if not self.user_name_check == False:
-                        raise NotNameError('В имени не только буквы.')
-                    if not self.user_email_check == False:
-                        raise NotEmailError('Адрес почты указан некорректно.')
-                    if not self.user_age_check == False:
-                        raise ValueError('Возраст указан некорректно.')
-                else:
-                    bad_list.append(i)
+                    if len(re.split(' ', i)) == 3:
+                        self.user_name, self.user_email, self.user_age = re.split(' ', i)
+                        # print(self.user_email)
+                        self.user_name = re.findall(self.user_name_check, self.user_name)
+                        self.user_age = re.findall(self.user_age_check, self.user_age)
+                        self.user_email = re.findall(self.user_email_check, self.user_email)
+                        print(self.user_age[0])
+                        # self.user_name, self.user_email, self.user_age = i.split(sep=' ')
+                        # print(self.user_name if self.user_name_check.search(self.user_name) != None)
+                        # if len(i.split(sep=' ')) != 3:
+                        #     raise ValueError('Не присутствуют все три поля')
+
+                            # if not self.user_name_check == False:
+                            #     raise NotNameError('В имени не только буквы.')
+                            # if not self.user_email_check == False:
+                            #     raise NotEmailError('Адрес почты указан некорректно.')
+                            # if not self.user_age_check == False:
+                            #     raise ValueError('Возраст указан некорректно.')
+                        # else:
+                        #     bad_list.append(i)
 
 
-        except Exception as exc:
-            print(f'Была ошибка {exc}')
+                except Exception as exc:
+                    print(f'Была ошибка {exc}')
 
-        finally:
-            self.write_new_file('registrations_bad.log', bad_list)
+                finally:
+                    pass
+                    # self.write_new_file('registrations_bad.log', bad_list)
+
 
     def print_strings(self):
         count = 0
