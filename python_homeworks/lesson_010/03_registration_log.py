@@ -42,7 +42,7 @@ class FileChecker:
         self.user_age = None
         self.user_age_check = r'\b[1-9]{1}[0-9]{1}'
         self.user_name = None
-        self.user_name_check = r'\b[A-Z][A-z]*[А-Я][А-я]*'
+        self.user_name_check = r'\b[A-Z]*[A-z]*[А-Я]*[А-я]*'
         self.user_email = None
         self.user_email_check = r'\b[a-z]*[.]*[a-z]*@\w*\.\w*'
         self.pattern = re.compile(self.user_name_check+str([ ])+self.user_email_check+str([ ])+self.user_age_check)
@@ -73,7 +73,7 @@ class FileChecker:
                         self.user_name = re.findall(self.user_name_check, self.user_name)
                         self.user_age = re.findall(self.user_age_check, self.user_age)
                         self.user_email = re.findall(self.user_email_check, self.user_email)
-                        print(self.user_age[0])
+                        print(len(self.user_name), len(self.user_email), len(self.user_age))
                         # self.user_name, self.user_email, self.user_age = i.split(sep=' ')
                         # print(self.user_name if self.user_name_check.search(self.user_name) != None)
                         # if len(i.split(sep=' ')) != 3:
