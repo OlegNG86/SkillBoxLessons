@@ -22,6 +22,8 @@
 # - поле возраст НЕ является числом от 10 до 99: ValueError
 # Вызов метода обернуть в try-except.
 
+import re
+
 
 class NotNameError(Exception):
     pass
@@ -36,38 +38,51 @@ class FileChecker:
     def __init__(self, name):
         self.name = name
         self.data = None
-        self.user_age = 0
-        self.user_age_check = isinstance(10 < self.user_age < 99, int)
+        self.user_age = None
+        self.user_age_check = False if self.user_age == None \
+            else len(re.findall(r'\b[1-9]{1}[0-9]{1}', self.user_age)) >= 1
         self.user_name = None
-        self.user_name_check = isinstance(self.user_name, str)
+        self.user_name_check = False if self.user_age == None \
+            else len(re.findall(r'\b[A-Z][A-z]*[А-Я][А-я]*', self.user_age)) >= 1
         self.user_email = None
-        self.user_email_check = '@' in self.user_email and '.' in self.user_email
+        self.user_email_check = False if self.user_age == None \
+            else len(re.findall(r'\b[a-z]*[.]*[a-z]*@\w*\.\w*', self.user_email)) >= 1
 
     def __str__(self):
         return f'Запущен файл {self.name}'
 
     def open_file(self):
         with open(self.name, 'r', encoding='utf8') as f:
-            self.data = f.read()
+            self.data = f.readlines()
         return self.data
 
     def check_file(self):
 
         try:
-            for self.user_name, self.user_email, self.user_age in self.data.split(sep=' '):
-                print(self.user_name)
-
-                if not self.user_name_check:
+            for i in self.data:
+                self.user_name, self.user_email, self.user_age = i.split(sep=' ')
+                print(self.user_name, self.user_email, self.user_age)
+                if not self.user_name_check == False:
                     raise NotNameError('В имени не только буквы.')
-                if not self.user_email_check:
+                if not self.user_email_check == False:
                     raise NotEmailError('Адрес почты указан некорректно.')
-                if not self.user_age_check:
+                if not self.user_age_check == False:
                     raise ValueError('Возраст указан некорректно.')
-        except:
-            print('Была ошибка')
+
+        except Exception as exc:
+            print(f'Была ошибка {exc}')
+
+
+    def print_strings(self):
+        count = 0
+        for i in self.data:
+            count += 1
+            print(type(i))
+        print(count)
 
 
 file_name = 'registrations.txt'
 file1 = FileChecker(file_name)
 file1.open_file()
 file1.check_file()
+# file1.print_strings()
