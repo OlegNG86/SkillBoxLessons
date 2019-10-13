@@ -37,6 +37,7 @@ class FileChecker:
 
     def __init__(self, name):
         self.name = name
+        self.new_name_file = None
         self.data = None
         self.user_age = None
         self.user_age_check = False if self.user_age == None \
@@ -56,22 +57,35 @@ class FileChecker:
             self.data = f.readlines()
         return self.data
 
-    def check_file(self):
+    def write_new_file(self, newnamefile, data):
+        self.new_name_file = newnamefile
+        self.data = data
+        with open(self.new_name_file, 'w', encoding='utf8') as f:
+            f.writelines(self.data)
 
+    def check_file(self):
+        bad_list = []
         try:
             for i in self.data:
-                self.user_name, self.user_email, self.user_age = i.split(sep=' ')
-                print(self.user_name, self.user_email, self.user_age)
-                if not self.user_name_check == False:
-                    raise NotNameError('В имени не только буквы.')
-                if not self.user_email_check == False:
-                    raise NotEmailError('Адрес почты указан некорректно.')
-                if not self.user_age_check == False:
-                    raise ValueError('Возраст указан некорректно.')
+                if len(i.split(sep=' ')) == 3:
+                    self.user_name, self.user_email, self.user_age = i.split(sep=' ')
+                    # print(self.user_name, self.user_email, self.user_age)
+
+                    if not self.user_name_check == False:
+                        raise NotNameError('В имени не только буквы.')
+                    if not self.user_email_check == False:
+                        raise NotEmailError('Адрес почты указан некорректно.')
+                    if not self.user_age_check == False:
+                        raise ValueError('Возраст указан некорректно.')
+                else:
+                    bad_list.append(i)
+
 
         except Exception as exc:
             print(f'Была ошибка {exc}')
 
+        finally:
+            self.write_new_file('registrations_bad.log', bad_list)
 
     def print_strings(self):
         count = 0
