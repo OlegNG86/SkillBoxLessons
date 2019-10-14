@@ -89,7 +89,8 @@ class FileChecker:
 
             except Exception as exc:
                 print(f'Была ошибка. {exc}')
-                bad_list.append(f'{i} {exc}')
+                bad_list.append(f'{i}')
+                bad_list.append(f'{exc}\n\n')
 
             finally:
                 self.write_new_file('registrations_bad.log', bad_list)
