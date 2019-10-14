@@ -42,7 +42,7 @@ class FileChecker:
         self.user_age = None
         self.user_age_check = r'\b[1-9]{1}[0-9]{1}'
         self.user_name = None
-        self.user_name_check = r'\b[A-Z]*[A-z]*[А-Я]*[А-я]*'
+        self.user_name_check = r'\b[А-Я][А-я]*'
         self.user_email = None
         self.user_email_check = r'\b[a-z]*[.]*[a-z]*@\w*\.\w*'
         self.pattern = re.compile(self.user_name_check+str([ ])+self.user_email_check+str([ ])+self.user_age_check)
@@ -63,7 +63,7 @@ class FileChecker:
 
     def check_file(self):
         # bad_list = []
-
+            count = 0
             for i in self.data:
                 try:
 
@@ -74,6 +74,7 @@ class FileChecker:
                         self.user_age = re.findall(self.user_age_check, self.user_age)
                         self.user_email = re.findall(self.user_email_check, self.user_email)
                         print(len(self.user_name), len(self.user_email), len(self.user_age))
+                        count += 1
                         # self.user_name, self.user_email, self.user_age = i.split(sep=' ')
                         # print(self.user_name if self.user_name_check.search(self.user_name) != None)
                         # if len(i.split(sep=' ')) != 3:
@@ -95,6 +96,7 @@ class FileChecker:
                 finally:
                     pass
                     # self.write_new_file('registrations_bad.log', bad_list)
+                    print(count)
 
 
     def print_strings(self):
