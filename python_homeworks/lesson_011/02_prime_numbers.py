@@ -6,13 +6,14 @@
 
 def get_prime_numbers(n):
     prime_numbers = []
-    for number in range(2, n+1):
+    for number in range(2, n + 1):
         for prime in prime_numbers:
             if number % prime == 0:
                 break
         else:
             prime_numbers.append(number)
     return prime_numbers
+
 
 # Часть 1
 # На основе алгоритма get_prime_numbers создать класс итерируемых обьектов,
@@ -22,14 +23,41 @@ def get_prime_numbers(n):
 
 
 class PrimeNumbers:
-    pass
-    # TODO здесь ваш код
 
+    def __init__(self, n):
+        self.n = n + 1
+        self.i = 0
+        self.prime_numbers = []
+        self.prime = 0
+
+    def __iter__(self):
+        self.i = 1
+        self.prime = 0
+        return self
+
+    def __next__(self):
+        while self.i < self.n:
+            self.i += 1
+            for j in self.prime_numbers:
+                if self.i % j == 0:
+                    break
+            else:
+                self.prime_numbers.append(self.i)
+                return self.i
+        else:
+            raise StopIteration
 
 prime_number_iterator = PrimeNumbers(n=10000)
 for number in prime_number_iterator:
     print(number)
+print(type(prime_number_iterator))
 
+print(prime_number_iterator.prime_numbers)
+
+
+print(get_prime_numbers(10000))
+
+print(prime_number_iterator.prime_numbers)
 
 # TODO после подтверждения части 1 преподователем, можно делать
 # Часть 2
@@ -42,9 +70,8 @@ def prime_numbers_generator(n):
     # TODO здесь ваш код
 
 
-for number in prime_numbers_generator(n=10000):
-    print(number)
-
+# for number in prime_numbers_generator(n=10000):
+#     print(number)
 
 # Часть 3
 # Написать несколько функций-фильтров, которые выдает True, если число:
