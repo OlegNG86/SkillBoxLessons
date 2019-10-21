@@ -47,6 +47,7 @@ class PrimeNumbers:
         else:
             raise StopIteration
 
+
 prime_number_iterator = PrimeNumbers(n=10000)
 for number in prime_number_iterator:
     print(number)
@@ -54,10 +55,10 @@ print(type(prime_number_iterator))
 
 print(prime_number_iterator.prime_numbers)
 
-
 print(get_prime_numbers(10000))
 
 print(prime_number_iterator.prime_numbers)
+
 
 # TODO после подтверждения части 1 преподователем, можно делать
 # Часть 2
@@ -66,12 +67,21 @@ print(prime_number_iterator.prime_numbers)
 
 
 def prime_numbers_generator(n):
-    pass
-    # TODO здесь ваш код
+    i = 2
+    while i < n:
+        prime = True
+        for a in range(2, i):
+            if i % a == 0:
+                prime = False
+                break
+        if prime:
+            yield i
+        i += 1
 
-
-# for number in prime_numbers_generator(n=10000):
-#     print(number)
+for number in prime_numbers_generator(n=10000):
+    if number == 13:
+        break
+    print(number)
 
 # Часть 3
 # Написать несколько функций-фильтров, которые выдает True, если число:
