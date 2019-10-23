@@ -9,36 +9,39 @@
 import os
 
 
-def log_errors(func):
-    def surrogate(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except Exception as exc:
-            filepath = 'function_errors.log'
-            func_name = func.__name__
-            func_param = func.__code__.co_varnames
-            type_error = type(exc)
-            text_error = exc.__str__()
-            output = f'Имя функции: {func_name}, параметры вызова: {func_param}, ' \
-                     f'тип ошибки: {type_error}, текст ошибки: {text_error}\n'
-            if os.path.exists(filepath):
-                with open(filepath, 'a', encoding='utf-8') as f:
-                    f.write(output)
-            else:
-                with open(filepath, 'w', encoding='utf-8') as f:
-                    f.write(output)
-            return None
-    return surrogate
+def log_errors(decor_name):
+    def decorator(func):
+        def surrogate(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except Exception as exc:
+                filepath = decor_name
+                func_name = func.__name__
+                func_param = func.__code__.co_varnames
+                type_error = type(exc)
+                text_error = exc.__str__()
+                output = f'Имя функции: {func_name}, параметры вызова: {func_param}, ' \
+                         f'тип ошибки: {type_error}, текст ошибки: {text_error}\n'
+                if os.path.exists(filepath):
+                    with open(filepath, 'a', encoding='utf-8') as f:
+                        f.write(output)
+                else:
+                    with open(filepath, 'w', encoding='utf-8') as f:
+                        f.write(output)
+                return None
 
+        return surrogate
+
+    return decorator
 
 
 # Проверить работу на следующих функциях
-@log_errors
+@log_errors('function_errors.log')
 def perky(param):
     return param / 0
 
 
-@log_errors
+@log_errors('function_errors.log')
 def check_line(line):
     name, email, age = line.split(' ')
     if not name.isalpha():
@@ -63,7 +66,6 @@ for line in lines:
     except Exception as exc:
         print(f'Invalid format: {exc}')
 perky(param=42)
-
 
 # Усложненное задание (делать по желанию).
 # Написать декоратор с параметром - именем файла
