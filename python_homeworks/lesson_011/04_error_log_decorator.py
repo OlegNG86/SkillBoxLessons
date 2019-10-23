@@ -6,11 +6,30 @@
 # Имя файла лога - function_errors.log
 # Формат лога: <имя функции> <параметры вызова> <тип ошибки> <текст ошибки>
 # Лог файл открывать каждый раз при ошибке в режиме 'a'
+import os
 
 
 def log_errors(func):
-    pass
-    # TODO здесь ваш код
+    def surrogate(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as exc:
+            filepath = 'function_errors.log'
+            func_name = func.__name__
+            func_param = func.__code__.co_varnames
+            type_error = type(exc)
+            text_error = exc.__str__()
+            output = f'Имя функции: {func_name}, параметры вызова: {func_param}, ' \
+                     f'тип ошибки: {type_error}, текст ошибки: {text_error}\n'
+            if os.path.exists(filepath):
+                with open(filepath, 'a', encoding='utf-8') as f:
+                    f.write(output)
+            else:
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    f.write(output)
+            return None
+    return surrogate
+
 
 
 # Проверить работу на следующих функциях
@@ -52,4 +71,3 @@ perky(param=42)
 # @log_errors('function_errors.log')
 # def func():
 #     pass
-
